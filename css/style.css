@@ -32,6 +32,16 @@ body{
   -webkit-font-smoothing:antialiased; overflow-x:hidden;
   padding-bottom:env(safe-area-inset-bottom);
 }
+html{-webkit-text-size-adjust:100%;touch-action:manipulation}
+body{touch-action:manipulation;overscroll-behavior:none}
+
+/* 所有可点元素：禁选中、禁长按菜单、禁点击高亮 */
+.card,.btn,.icon-btn,.chip,.cellbtn,.lk-tile,.pb-gem,.sd-cell{
+  touch-action:manipulation;
+  -webkit-user-select:none;user-select:none;
+  -webkit-touch-callout:none;
+  -webkit-tap-highlight-color:transparent;
+}
 .sprite{display:none}
 svg .ico,.ico{width:24px;height:24px;display:block}
 .ico,svg[class*="ico"]{fill:none;stroke:currentColor;stroke-width:2;
@@ -181,3 +191,17 @@ body.muted #btnSound{color:var(--ink-soft)}
     transition-duration:.01ms!important}
   .blobs{display:none}
 }
+.cheat{position:absolute;z-index:15;left:0;top:0;border-radius:16px;
+  background:color-mix(in srgb,var(--surface) 26%,transparent);
+  border:2px dashed var(--purple);backdrop-filter:blur(1px) saturate(1.1);
+  box-shadow:0 8px 22px -10px rgba(42,27,61,.6);animation:pop .3s var(--ease) both}
+.cheat-handle{display:flex;align-items:center;gap:6px;padding:6px 10px;font-size:12px;
+  color:#fff;background:linear-gradient(135deg,var(--purple),var(--pink));
+  border-radius:14px 14px 0 0;cursor:grab;touch-action:none;user-select:none}
+.cheat-handle .ico{width:15px;height:15px}
+.cheat.dragging .cheat-handle{cursor:grabbing}
+.cheat-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);
+  pointer-events:none}
+.cheat-grid i{border:1px solid color-mix(in srgb,var(--purple) 55%,transparent)}
+.cheat-grid i.mid{background:color-mix(in srgb,var(--yellow) 22%,transparent);
+  border:2px solid var(--pink);border-radius:6px}
