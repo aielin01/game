@@ -12,11 +12,13 @@
   .pb-stage{position:relative;border-radius:20px;background:var(--surface-2);
     border:2px solid var(--line);overflow:hidden}
   .pb-gem{position:absolute;left:0;top:0;display:grid;place-items:center;padding:0;border:none;
-    background:none;cursor:pointer;transition:transform .26s cubic-bezier(.3,1.2,.5,1),opacity .2s}
-  .pb-gem i{display:grid;place-items:center;width:86%;height:86%;border-radius:30%;
+background:none;cursor:pointer;
+    transition:translate .26s cubic-bezier(.3,1.2,.5,1),transform .18s var(--ease),opacity .2s}
+    .pb-gem i{display:grid;place-items:center;width:86%;height:86%;border-radius:30%;
     color:#fff;box-shadow:inset 0 -4px 0 rgba(0,0,0,.16);
-    transition:transform .18s var(--ease),box-shadow .18s}
-  .pb-gem svg{width:58%;height:58%;stroke-width:2.4}
+transition:translate .26s cubic-bezier(.3,1.2,.5,1),
+             transform .18s var(--ease),opacity .2s}
+             .pb-gem svg{width:58%;height:58%;stroke-width:2.4}
   .pb-gem:hover i{transform:scale(1.06)}
   .pb-gem[data-sel="1"] i{box-shadow:0 0 0 4px #fff,0 0 0 8px currentColor;
     animation:pbPulse .8s ease-in-out infinite}
@@ -82,8 +84,7 @@
       g.r = r; g.c = c;
       g.style.width = g.style.height = size + 'px';
       if (instant) g.style.transition = 'none';
-      g.style.transform = `translate(${c * size}px,${r * size}px)`;
-      g.setAttribute('aria-label', `第 ${Math.max(r + 1, 1)} 行第 ${c + 1} 列 宝石 ${g.kind + 1}`);
+g.style.translate = `${c * size}px ${r * size}px`;      g.setAttribute('aria-label', `第 ${Math.max(r + 1, 1)} 行第 ${c + 1} 列 宝石 ${g.kind + 1}`);
       if (instant) requestAnimationFrame(() => g.style.transition = '');
     }
 

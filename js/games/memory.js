@@ -80,8 +80,8 @@
     }
 
     function flip(btn) {
-      if (lock || btn._done || btn === first) return;
-      timer.start();
+if (lock || btn._done) return;
+if (btn === first) { setFlipped(btn, false); first = null; Sfx.play('select'); return; }      timer.start();
       Sfx.play('flip');
       setFlipped(btn, true);
 

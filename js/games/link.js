@@ -17,14 +17,16 @@
   .lk-tile{position:absolute;left:0;top:0;display:grid;place-items:center;padding:0;
     border:2px solid var(--line);border-radius:12px;background:var(--surface-2);
     box-shadow:0 3px 0 rgba(42,27,61,.12);cursor:pointer;
-    transition:transform .2s var(--ease),opacity .25s,box-shadow .2s,border-color .2s}
+  transition:translate .2s var(--ease),transform .2s var(--ease),
+             opacity .25s,box-shadow .2s,border-color .2s}
+  }
   .lk-tile svg{width:62%;height:62%;stroke-width:2.2}
   .lk-tile:hover{filter:brightness(1.06)}
   .lk-tile[data-sel="1"]{border-color:currentColor;box-shadow:0 0 0 4px color-mix(in srgb,currentColor 32%,transparent);
     animation:lkPulse .9s ease-in-out infinite}
   .lk-tile[data-hint="1"]{animation:lkPulse .55s ease-in-out infinite}
   .lk-tile.gone{opacity:0;pointer-events:none}
-  .lk-svg{position:absolute;inset:0;pointer-events:none;overflow:visible}
+  .lk-svg{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:5}
   .lk-path{fill:none;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;
     animation:lkPath .42s ease forwards}
   @keyframes lkPulse{50%{transform:scale(1.09)}}
@@ -175,8 +177,7 @@
       for (let r = 1; r <= R; r++) for (let c = 1; c <= C; c++) {
         const t = grid[r][c]; if (!t) continue;
         t.style.width = t.style.height = (size - 4) + 'px';
-        t.style.transform = `translate(${c * size + 2}px,${r * size + 2}px)`;
-      }
+t.style.translate = `${c * size + 2}px ${r * size + 2}px`;      }
     }
     let rzTimer;
     const onResize = () => { clearTimeout(rzTimer); rzTimer = setTimeout(layout, 120); };
