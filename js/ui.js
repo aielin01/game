@@ -94,6 +94,8 @@ window.UI = (function () {
       bar.append(b);
     });
     box.append(bar);
+    const onEsc = e => { if (e.key === 'Escape') { close(); document.removeEventListener('keydown', onEsc); } };
+document.addEventListener('keydown', onEsc);
     document.body.append(wrap);
     setTimeout(() => bar.querySelector('button')?.focus(), 60);
     wrap.addEventListener('click', e => { if (e.target === wrap) close(); });

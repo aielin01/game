@@ -87,8 +87,7 @@ window.App = (function () {
     document.querySelectorAll('.modal').forEach(m => m.remove());
     const id = (location.hash || '#/').replace(/^#\/?/, '');
     const meta = games.find(g => g.id === id);
-    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
-    if (!meta) { renderGallery(); return; }
+window.scrollTo({ top: 0, behavior: 'auto' });    if (!meta) { renderGallery(); return; }
     current = meta.mount(meta) || null;
   }
 
