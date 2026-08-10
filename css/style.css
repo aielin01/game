@@ -1,1 +1,183 @@
+:root{
+  --pink:#ff4d8d;  --yellow:#ffd93d; --cyan:#4dd6ff;
+  --purple:#7c4dff;--mint:#3ee0a6;  --orange:#ff8a3d;
+  --grape:#5b2ee0; --candy:#ff6fb5;
 
+  --bg:#fff6f2; --bg2:#ffeaf3;
+  --surface:#ffffff; --surface-2:#fff2f7;
+  --ink:#2a1b3d; --ink-soft:#6b5b80; --line:#f0dfe9;
+  --shadow:0 10px 0 rgba(42,27,61,.10), 0 18px 34px -18px rgba(42,27,61,.45);
+  --shadow-sm:0 5px 0 rgba(42,27,61,.09);
+  --r-lg:28px; --r-md:20px; --r-sm:14px;
+  --ease:cubic-bezier(.34,1.56,.64,1);   /* 回弹 */
+  --font:"ZCOOL KuaiLe","Baloo 2","PingFang SC","Yuanti SC","幼圆",
+         "HYQiHei","Microsoft YaHei UI Rounded","Nunito",sans-serif;
+}
+html[data-theme="dark"]{
+  --bg:#160f22; --bg2:#241333;
+  --surface:#241a35; --surface-2:#2e2142;
+  --ink:#ffeef7; --ink-soft:#b9a6cf; --line:#3a2b52;
+  --shadow:0 10px 0 rgba(0,0,0,.35), 0 20px 40px -18px rgba(0,0,0,.7);
+  --shadow-sm:0 5px 0 rgba(0,0,0,.32);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:var(--font); color:var(--ink);
+  background:
+    radial-gradient(1200px 700px at 110% -10%, var(--bg2), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, var(--bg2), transparent 60%),
+    var(--bg);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.sprite{display:none}
+svg .ico,.ico{width:24px;height:24px;display:block}
+.ico,svg[class*="ico"]{fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round}
+.hidden{display:none!important}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--purple);outline-offset:3px;border-radius:8px}
+
+/* ===================== 背景光斑 ===================== */
+.blobs{position:fixed;inset:0;z-index:-1;overflow:hidden;filter:blur(60px);opacity:.5}
+.blobs i{position:absolute;width:42vmin;height:42vmin;border-radius:50%;display:block;
+  animation:float 18s var(--i,0s) ease-in-out infinite alternate}
+.blobs i:nth-child(1){background:var(--pink);top:-8%;left:-6%}
+.blobs i:nth-child(2){background:var(--cyan);top:38%;right:-10%;--i:-4s}
+.blobs i:nth-child(3){background:var(--yellow);bottom:-12%;left:22%;--i:-8s}
+.blobs i:nth-child(4){background:var(--purple);top:8%;right:26%;--i:-12s}
+@keyframes float{to{transform:translate3d(6vmin,-7vmin,0) scale(1.18)}}
+
+/* ===================== 顶栏 ===================== */
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;
+  padding:14px clamp(14px,4vw,32px);
+  background:color-mix(in srgb,var(--bg) 72%,transparent);
+  backdrop-filter:blur(14px) saturate(1.3);
+  border-bottom:2px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;margin-right:auto}
+.brand-badge{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;
+  color:#fff;background:linear-gradient(135deg,var(--pink),var(--purple));
+  box-shadow:var(--shadow-sm);transition:transform .4s var(--ease)}
+.brand:hover .brand-badge{transform:rotate(-8deg) scale(1.06)}
+.brand-text{font-size:clamp(18px,2.6vw,22px);letter-spacing:.5px}
+.topbar-actions{display:flex;gap:8px}
+.icon-btn{display:grid;place-items:center;width:42px;height:42px;border:2px solid var(--line);
+  border-radius:14px;background:var(--surface);box-shadow:var(--shadow-sm);
+  transition:transform .18s var(--ease),background .2s}
+.icon-btn:hover{transform:translateY(-2px)}
+.icon-btn:active{transform:translateY(2px);box-shadow:none}
+.ico-moon,.ico-off{display:none}
+html[data-theme="dark"] .ico-sun{display:none}
+html[data-theme="dark"] .ico-moon{display:block}
+body.muted .ico-on{display:none}
+body.muted .ico-off{display:block}
+body.muted #btnSound{color:var(--ink-soft)}
+
+/* ===================== 布局 ===================== */
+.view{max-width:1080px;margin:0 auto;padding:clamp(18px,4vw,34px) clamp(14px,4vw,28px) 80px}
+.hero{text-align:center;margin-bottom:clamp(20px,4vw,34px);animation:pop .5s var(--ease) both}
+.hero h1{margin:0 0 8px;font-size:clamp(28px,6vw,46px);line-height:1.15;
+  background:linear-gradient(96deg,var(--pink),var(--orange),var(--purple),var(--cyan));
+  background-size:280% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:hue 9s linear infinite}
+@keyframes hue{to{background-position:280% 0}}
+.hero p{margin:0;color:var(--ink-soft);font-size:clamp(13px,2.4vw,16px)}
+
+/* ===================== 画廊 ===================== */
+.gallery{display:grid;gap:clamp(14px,2.6vw,22px);
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.card{position:relative;display:flex;flex-direction:column;gap:12px;padding:20px;
+  text-align:left;text-decoration:none;color:inherit;border:3px solid var(--line);
+  border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow);overflow:hidden;
+  animation:rise .55s var(--ease) both;animation-delay:calc(var(--n,0)*70ms);
+  transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+.card::before{content:"";position:absolute;inset:-40% -10% auto -10%;height:150px;
+  background:radial-gradient(closest-side,var(--g1),transparent);opacity:.35;
+  transition:transform .5s var(--ease)}
+.card:hover,.card:focus-visible{transform:translateY(-8px) rotate(-.6deg);
+  border-color:var(--g1);box-shadow:0 16px 0 rgba(42,27,61,.10),0 30px 50px -22px rgba(42,27,61,.5)}
+.card:hover::before{transform:translateY(18px) scale(1.15)}
+.card:active{transform:translateY(-2px)}
+.card-icon{position:relative;display:grid;place-items:center;width:66px;height:66px;
+  border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--g1),var(--g2));
+  box-shadow:var(--shadow-sm)}
+.card-icon .ico{width:34px;height:34px;stroke-width:2.1}
+.card:hover .card-icon{animation:wiggle .6s var(--ease)}
+.card h2{margin:0;font-size:21px}
+.card p{margin:0;font-size:13.5px;line-height:1.65;color:var(--ink-soft);flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11.5px;padding:4px 10px;border-radius:999px;
+  background:var(--surface-2);color:var(--ink-soft);border:1.5px solid var(--line)}
+.card-go{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--g1)}
+.card-go .ico{width:18px;height:18px}
+
+/* ===================== 游戏页通用 ===================== */
+.game-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:18px}
+.game-title{display:flex;align-items:center;gap:12px;margin:0 auto 0 0;font-size:clamp(20px,4vw,28px)}
+.game-title .card-icon{width:48px;height:48px;border-radius:16px}
+.game-title .card-icon .ico{width:26px;height:26px}
+.hud{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border-radius:999px;
+  border:2px solid var(--line);background:var(--surface);box-shadow:var(--shadow-sm);
+  font-size:14px;font-variant-numeric:tabular-nums}
+.chip .ico{width:18px;height:18px;color:var(--g1)}
+.chip.flash{animation:pop .35s var(--ease)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border:none;
+  border-radius:16px;color:#fff;background:linear-gradient(135deg,var(--g1),var(--g2));
+  box-shadow:var(--shadow-sm);transition:transform .18s var(--ease),filter .2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.btn.ghost{background:var(--surface);color:var(--ink);border:2px solid var(--line)}
+.btn[aria-pressed="true"]{outline:3px solid var(--g1);outline-offset:2px}
+.board-wrap{display:grid;place-items:center;padding:clamp(12px,3vw,22px);
+  border:3px solid var(--line);border-radius:var(--r-lg);background:var(--surface);
+  box-shadow:var(--shadow)}
+.hint-bar{margin-top:14px;font-size:13px;color:var(--ink-soft);text-align:center;line-height:1.7}
+
+/* 通用格子 */
+.cellbtn{display:grid;place-items:center;border:2px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surface-2);box-shadow:var(--shadow-sm);
+  transition:transform .16s var(--ease),background .2s,border-color .2s,opacity .3s}
+.cellbtn:hover:not(:disabled){transform:translateY(-2px)}
+.cellbtn:active:not(:disabled){transform:translateY(1px);box-shadow:none}
+
+/* ===================== 弹层 / 提示 ===================== */
+.modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px;
+  background:rgba(20,10,32,.5);backdrop-filter:blur(6px);animation:fade .25s ease both}
+.modal-box{width:min(420px,100%);padding:30px 26px;text-align:center;border-radius:var(--r-lg);
+  border:3px solid var(--line);background:var(--surface);box-shadow:var(--shadow);
+  animation:pop .45s var(--ease) both}
+.modal-box .card-icon{margin:0 auto 14px;width:74px;height:74px}
+.modal-box h3{margin:0 0 8px;font-size:26px}
+.modal-box p{margin:0 0 20px;color:var(--ink-soft);line-height:1.7}
+.modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:26px;z-index:70;transform:translate(-50%,140%);
+  padding:12px 20px;border-radius:999px;border:2px solid var(--line);background:var(--surface);
+  box-shadow:var(--shadow);font-size:14px;transition:transform .4s var(--ease)}
+.toast.show{transform:translate(-50%,0)}
+.fx-layer{position:fixed;inset:0;z-index:80;pointer-events:none;overflow:hidden}
+.spark{position:absolute;width:12px;height:12px;border-radius:3px;
+  animation:spark var(--d,900ms) cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes spark{
+  0%{transform:translate(0,0) scale(1) rotate(0)}
+  100%{transform:translate(var(--x),var(--y)) scale(.2) rotate(var(--r));opacity:0}}
+
+/* ===================== 关键帧 ===================== */
+@keyframes pop{0%{transform:scale(.82);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes rise{0%{transform:translateY(22px) scale(.96);opacity:0}100%{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}30%{transform:rotate(-11deg) scale(1.08)}
+  65%{transform:rotate(9deg) scale(1.05)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}
+  40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+@keyframes boom{0%{transform:scale(1)}45%{transform:scale(1.28)}100%{transform:scale(1)}}
+.shake{animation:shake .42s ease}
+.boom{animation:boom .4s var(--ease)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important}
+  .blobs{display:none}
+}
