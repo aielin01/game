@@ -6,8 +6,6 @@
     { s: 'i-shape-flower', c: '#3ddc97' }, { s: 'i-shape-bolt', c: '#ff8a3d' },
     { s: 'i-shape-moon2', c: '#0d0d0f' },  { s: 'i-shape-ring', c: '#75757f' }
   ];
-  html[data-theme="dark"] .lk-tile[data-kind="6"]{ color: #f6f6f7 !important; }
-  html[data-theme="dark"] .lk-tile[data-kind="7"]{ color: #84848e !important; }
 
   const LV = {
     easy:   { r: 6,  c: 8,  k: 6, t: 180, label: '轻松' },
@@ -31,7 +29,9 @@
   .lk-path{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;
     animation:lkPath .4s ease forwards}
   @keyframes lkPulse{50%{scale:1.08}}
-  @keyframes lkPath{0%{opacity:0}20%{opacity:1}100%{opacity:0}}`;
+  @keyframes lkPath{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
+  html[data-theme="dark"] .lk-tile[data-kind="6"]{ color: #f6f6f7 !important; }
+  html[data-theme="dark"] .lk-tile[data-kind="7"]{ color: #84848e !important; }`;
 
   function injectCSS() {
     if (!document.getElementById('css-link')) {
